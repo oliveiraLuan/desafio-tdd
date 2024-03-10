@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Comparator;
 import java.util.List;
 
 @RestController
@@ -20,6 +21,7 @@ public class DepartmentResource {
     @GetMapping
     public ResponseEntity<List<DepartmentDTO>> findAll(){
         List<DepartmentDTO> departments = service.findAll();
+        departments.sort(Comparator.comparing(department -> department.getName()));
         return ResponseEntity.ok(departments);
     }
 }
