@@ -2,11 +2,13 @@ package com.devsuperior.demo.services;
 
 import com.devsuperior.demo.dto.DepartmentDTO;
 import com.devsuperior.demo.entities.Department;
+import com.devsuperior.demo.entities.Employee;
 import com.devsuperior.demo.repositories.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -21,5 +23,10 @@ public class DepartmentService {
                 .stream()
                 .map(department -> new DepartmentDTO(department))
                 .collect(Collectors.toList());
+    }
+
+    public Department findById(Long id){
+        Optional<Department> department = repository.findById(id);
+        return department.isPresent() ? department.get() : null;
     }
 }
