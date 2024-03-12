@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.Comparator;
-import java.util.List;
 
 @RestController
 @RequestMapping("/employees")
@@ -34,7 +32,8 @@ public class EmployeeResource {
         EmployeeDTO employee = service.insert(dto);
         URI uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
-                .buildAndExpand(employee)
+                .path("/{id}")
+                .buildAndExpand(dto.getId())
                 .toUri();
         return ResponseEntity.created(uri).body(employee);
     }
